@@ -1,0 +1,22 @@
+.nav {
+  box-shadow: 0px 0.3px 6px #2563eb !important;
+}
+
+.nav-logo {
+  width: 3em;
+}
+
+.nav-btn-cekjasa,
+.nav-btn-about {
+  border: 2px solid #2563eb !important;
+  border-radius: 14px !important;
+  padding: 0.5em 1.2em !important;
+  color: #2563eb !important;
+  transition: background-color 0.8s, color 0.3s !important;
+}
+
+.nav-btn-cekjasa:hover,
+.nav-btn-about:hover {
+  background-color: #2563eb !important;
+  color: white !important;
+}
