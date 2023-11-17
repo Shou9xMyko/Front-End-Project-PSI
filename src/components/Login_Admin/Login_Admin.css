@@ -1,0 +1,14 @@
+.email-input,
+.password-input {
+  width: 40% !important;
+}
+
+#email-input,
+#password-input {
+  font-weight: 500;
+}
+
+#btn-submit {
+  background-color: #2563eb;
+  font-weight: 700;
+}

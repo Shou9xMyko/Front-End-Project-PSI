@@ -1,0 +1,18 @@
+.wrapper-admin-menu {
+  /* border: 1px solid #2563eb !important; */
+  border-radius: 6px;
+}
+
+.wrapperMenu {
+  border: 1.5px solid #2563eb;
+}
+
+.title-menu-1 {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.title-menu-2 {
+  color: #f40304;
+  font-weight: 700;
+}

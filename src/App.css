@@ -1,5 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
 body {
   margin: 0 !important;
   padding: 0 !important;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif !important;
+  background-color: #f0f2f5 !important;
+  /* min-height: 100vh !important; */
 }

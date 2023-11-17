@@ -1,5 +1,5 @@
 import InputSearchJasa from "../InputSearchJasa/InputSearchJasa";
-import Navbars from "../Navbar/Navbar";
+import Navbars from "../Navbar/Navbars";
 import "./Homepage.css";
 import BannerPelangiPrint from "../../assets/Banner_Pelangi_Print.png";
 import ListJasa from "../ListJasa/ListJasa";
