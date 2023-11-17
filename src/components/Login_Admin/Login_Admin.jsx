@@ -38,6 +38,7 @@ const LoginAdmin = () => {
           <div className="col-6 ">
             <div className="row m-0 bg-dangers justify-content-center">
               <div className="col-12 p-0 bg-warnings">
+                <p className="fw-bold">Masukan E-mail admin anda</p>
                 <InputGroup className="email-input mb-4 w-100">
                   <Form.Control
                     placeholder="Masukan Email"
@@ -51,6 +52,7 @@ const LoginAdmin = () => {
                 </InputGroup>
               </div>
               <div className="col-12 p-0">
+                <p className="fw-bold">Masukan Password admin anda</p>
                 <InputGroup className="password-input w-100 mb-5">
                   <Form.Control
                     placeholder="Masukan Password"

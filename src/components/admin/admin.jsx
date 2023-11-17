@@ -6,7 +6,7 @@ import AdminMenu from "../admin_menu/Admin_Menu";
 const Admin = () => {
   return (
     <div className="row m-0">
-      <div className="col-12 " style={{ backgroundColor: "#2563eb" }}>
+      <div className="col-12 p-0">
         <NavbarsAdmin />
       </div>
       <div className="col-12 pt-3">

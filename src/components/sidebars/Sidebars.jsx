@@ -17,17 +17,24 @@ const Sidebars = () => {
         <Menu className="pt-2">
           <MenuItem
             className="sub-menu fw-bold "
-            component={<Link to="/daftar-transaksi" />}
+            component={<Link to="/admin/daftar-transaksi" />}
             icon={<RiBillLine />}
           >
             Daftar Transaksi
           </MenuItem>
           <MenuItem
             className="sub-menu fw-bold "
-            component={<Link to="/daftar-jasa" />}
+            component={<Link to="/admin/daftar-jasa" />}
             icon={<FaServicestack />}
           >
             Daftar Jasa
+          </MenuItem>
+          <MenuItem
+            className="sub-menu fw-bold "
+            component={<Link to="/admin/daftar-laporan-keuangan" />}
+            icon={<FaServicestack />}
+          >
+            Laporan Keuangan
           </MenuItem>
         </Menu>
       </Sidebar>

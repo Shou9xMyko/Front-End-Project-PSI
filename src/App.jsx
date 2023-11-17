@@ -3,6 +3,9 @@ import "./App.css";
 import Homepage from "./components/Homepage/Homepage";
 import Admin from "./components/admin/admin";
 import LoginAdmin from "./components/Login_Admin/Login_Admin";
+import TableTransaksi from "./components/table/table_daftar_transaksi/TableTransaksi";
+import TableDaftarJasa from "./components/table/table_daftar_jasa/TableDaftarJasa";
+import TableLaporanKeuangan from "./components/table/table_laporan_keuangan/TableLaporanKeuangan";
 
 function App() {
   return (
@@ -11,7 +14,12 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login-admin" element={<LoginAdmin />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/daftar-transaksi" element={<Admin />} />
+        <Route path="/admin/daftar-transaksi" element={<TableTransaksi />} />
+        <Route path="/admin/daftar-jasa" element={<TableDaftarJasa />} />
+        <Route
+          path="/admin/daftar-laporan-keuangan"
+          element={<TableLaporanKeuangan />}
+        />
       </Routes>
     </BrowserRouter>
   );
