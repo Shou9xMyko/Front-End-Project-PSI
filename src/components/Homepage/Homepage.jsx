@@ -9,10 +9,10 @@ const Homepage = () => {
   return (
     <>
       <Navbars />
-      <InputSearchJasa />
       <div className="d-flex justify-content-center">
         <img src={BannerPelangiPrint} alt="Banners" />
       </div>
+      {/* <InputSearchJasa /> */}
       <ListJasa />
       <Footer />
     </>

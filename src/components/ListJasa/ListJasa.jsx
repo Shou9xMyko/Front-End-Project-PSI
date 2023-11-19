@@ -1,6 +1,7 @@
 import "./ListJasa.css";
 import Card from "react-bootstrap/Card";
 import CardImage from "../../assets/Image_Card.png";
+import InputSearchJasa from "../InputSearchJasa/InputSearchJasa";
 
 const ListJasa = () => {
   const cardData = new Array(20).fill(null);
@@ -15,6 +16,7 @@ const ListJasa = () => {
           <h3>Total Jasa : {cardData.length}</h3>
         </div>
       </div>
+      <InputSearchJasa />
 
       {/* Card */}
       <div className="row gy-4 gx-0 mt-1">

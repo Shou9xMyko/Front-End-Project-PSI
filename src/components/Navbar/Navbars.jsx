@@ -25,13 +25,7 @@ const Navbars = () => {
             >
               About
             </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to="/jasa"
-              className="nav-btn-cekjasa text-decoration-none btn"
-            >
-              Cek Jasa
-            </Nav.Link>
+
             <Nav.Link
               as={Link}
               to="/login-admin"
