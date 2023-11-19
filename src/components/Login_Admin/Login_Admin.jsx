@@ -4,10 +4,15 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import PrintingMachineImg from "../../assets/printing_machine.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GetLogin } from "../../Redux/Action/LoginAction";
 
 const LoginAdmin = () => {
+  const { login_response } = useSelector((state) => state.LoginReducer);
+
+  const dispatch = useDispatch();
+
   const [inputLogin, setInputLogin] = useState({
     email: "",
     password: "",
@@ -21,6 +26,16 @@ const LoginAdmin = () => {
       [name]: value,
     });
   };
+
+  const handleSubmit = () => {
+    dispatch(GetLogin(inputLogin.email, inputLogin.password));
+  };
+
+  useEffect(() => {
+    if (login_response != "") {
+      console.log(login_response);
+    }
+  }, [login_response]);
 
   return (
     <>
@@ -74,13 +89,14 @@ const LoginAdmin = () => {
                 </InputGroup>
               </div>
               <div className="col-12 p-0">
-                <Link
-                  to="/admin"
+                <button
+                  // to="/admin"
                   className="btn w-100 text-white"
                   id="btn-submit"
+                  onClick={handleSubmit}
                 >
                   Submit
-                </Link>
+                </button>
               </div>
             </div>
           </div>
