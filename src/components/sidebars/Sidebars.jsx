@@ -3,6 +3,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { RiBillLine } from "react-icons/ri";
 import { FaServicestack } from "react-icons/fa";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 const Sidebars = () => {
   return (
@@ -32,7 +33,7 @@ const Sidebars = () => {
           <MenuItem
             className="sub-menu fw-bold "
             component={<Link to="/admin/daftar-laporan-keuangan" />}
-            icon={<FaServicestack />}
+            icon={<LiaMoneyBillWaveSolid />}
           >
             Laporan Keuangan
           </MenuItem>
