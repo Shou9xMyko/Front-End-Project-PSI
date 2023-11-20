@@ -4,9 +4,23 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FaUserCircle, FaDoorOpen } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { ClearLogin } from "../../Redux/Action/LoginAction.js";
 
 const NavbarsAdmin = () => {
+  const { login_response } = useSelector((state) => state.LoginReducer);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const Logout = () => {
+    localStorage.clear();
+
+    dispatch(ClearLogin());
+    navigate("/");
+  };
+
   return (
     <Navbar expand="lg" className="" style={{ backgroundColor: "#2563eb" }}>
       <Container>
@@ -16,7 +30,7 @@ const NavbarsAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link className="text-white fw-bold" as={Link} to="/">
+            <Nav.Link as={Link} className="text-white fw-bold" to="/">
               Home
             </Nav.Link>
             <Navbar.Text className="text-white fw-bold">
@@ -27,7 +41,7 @@ const NavbarsAdmin = () => {
               title={<FaUserCircle className="fs-3 text-white" />}
               align="end"
             >
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item onClick={Logout}>
                 <FaDoorOpen /> Logout
               </NavDropdown.Item>
             </NavDropdown>

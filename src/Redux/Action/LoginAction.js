@@ -1,11 +1,20 @@
 import axios from "axios";
 
-export const LOGIN = "TEST";
+export const LOGIN = "Login";
+export const CLEAR_LOGIN = "Clear_Login";
 
 export const Login = (data) => {
   return {
     type: LOGIN,
     payload: data,
+  };
+};
+
+export const ClearLogin = () => {
+  console.log("masukk");
+  return {
+    type: CLEAR_LOGIN,
+    payload: "",
   };
 };
 
