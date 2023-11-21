@@ -11,7 +11,6 @@ export const Login = (data) => {
 };
 
 export const ClearLogin = () => {
-  console.log("masukk");
   return {
     type: CLEAR_LOGIN,
     payload: "",

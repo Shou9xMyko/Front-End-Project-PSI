@@ -67,6 +67,7 @@ const LoginAdmin = () => {
           email: login_response.data[0].email,
           status: login_response.status,
           status_code: login_response.status_code,
+          token: login_response.token,
           isLogin: true,
         };
 

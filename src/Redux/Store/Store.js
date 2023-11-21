@@ -6,8 +6,9 @@ import {
 import thunk from "redux-thunk";
 
 import LoginReducer from "../Reducer/LoginReducer";
+import JasaReducer from "../Reducer/JasaReducer";
 
-const rootReducer = combineReducers({ LoginReducer });
+const rootReducer = combineReducers({ LoginReducer, JasaReducer });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
