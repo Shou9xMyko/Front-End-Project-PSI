@@ -4,7 +4,7 @@ import Homepage from "./components/Homepage/Homepage";
 import Admin from "./components/admin/admin";
 import LoginAdmin from "./components/Login_Admin/Login_Admin";
 import TableTransaksi from "./components/table/table_daftar_transaksi/TableTransaksi";
-import TableDaftarJasa from "./components/table/table_daftar_jasa/TableDaftarJasa";
+import CardDaftarJasa from "./components/table/Daftar_jasa/CardDaftarJasa";
 import TableLaporanKeuangan from "./components/table/table_laporan_keuangan/TableLaporanKeuangan";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         <Route path="/login-admin" element={<LoginAdmin />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/daftar-transaksi" element={<TableTransaksi />} />
-        <Route path="/admin/daftar-jasa" element={<TableDaftarJasa />} />
+        <Route path="/admin/daftar-jasa" element={<CardDaftarJasa />} />
         <Route
           path="/admin/daftar-laporan-keuangan"
           element={<TableLaporanKeuangan />}

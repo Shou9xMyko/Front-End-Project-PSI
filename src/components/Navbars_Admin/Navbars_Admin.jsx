@@ -7,9 +7,13 @@ import { FaUserCircle, FaDoorOpen } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ClearLogin } from "../../Redux/Action/LoginAction.js";
+import { useEffect } from "react";
+import CryptoJS from "crypto-js";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const NavbarsAdmin = () => {
-  const { login_response } = useSelector((state) => state.LoginReducer);
+  const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,6 +25,35 @@ const NavbarsAdmin = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    const decryptEmail = () => {
+      const decryptLogin = CryptoJS.AES.decrypt(
+        localStorage.getItem("login"),
+        import.meta.env.VITE_SECRET_KEY
+      );
+
+      const resultDecrypt = JSON.parse(
+        decryptLogin.toString(CryptoJS.enc.Utf8)
+      );
+      const email = resultDecrypt.email;
+
+      if (typeof email == "undefined") {
+        Swal.fire({
+          icon: "success",
+          title: "Terjai Kesalahan!",
+          text: "Anda akan diarahkan ke halaman login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        localStorage.clear();
+        navigate("/login-admin");
+      } else {
+        setEmail(email);
+      }
+    };
+    decryptEmail();
+  }, []);
+
   return (
     <Navbar expand="lg" className="" style={{ backgroundColor: "#2563eb" }}>
       <Container>
@@ -30,11 +63,21 @@ const NavbarsAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link as={Link} className="text-white fw-bold" to="/">
-              Home
+            <Nav.Link
+              as={Link}
+              className=""
+              // id="admin-home-menu"
+              // to="/"
+            >
+              <Link to="/" className="me-2" id="admin-home-menu">
+                Home
+              </Link>
             </Nav.Link>
-            <Navbar.Text className="text-white fw-bold">
-              Miko Firnando
+            <Navbar.Text
+              className="text-white fw-medium"
+              id="admin-email-as-login"
+            >
+              {email}
             </Navbar.Text>
 
             <NavDropdown

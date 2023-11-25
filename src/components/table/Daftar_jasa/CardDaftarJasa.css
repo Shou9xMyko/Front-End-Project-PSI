@@ -1,0 +1,9 @@
+#container-daftar-jasa {
+  overflow-y: auto;
+  height: 75vh;
+}
+
+/* .jasa-image {
+  height: 50% !important;
+  object-fit: cover !important;
+} */

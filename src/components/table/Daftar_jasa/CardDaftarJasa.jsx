@@ -1,19 +1,22 @@
-import "./TableDaftarJasa.css";
+import "./CardDaftarJasa.css";
 import NavbarsAdmin from "../../Navbars_Admin/Navbars_Admin";
 import Sidebars from "../../sidebars/Sidebars";
 import { Button, Form, Modal, Container } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { AddJasa } from "../../../Redux/Action/JasaAction";
+import { AddJasa, getJasa } from "../../../Redux/Action/JasaAction";
+import { Vortex } from "react-loader-spinner";
+import { renderToString } from "react-dom/server";
+import EditJasa from "./ActionJasa/EditJasa/EditJasa";
+import DeleteJasa from "./ActionJasa/DeleteJasa/DeleteJasa";
 
-const TableDaftarJasa = () => {
-  const { isLoadingAddJasa } = useSelector((state) => state.JasaReducer);
+const CardDaftarJasa = () => {
+  const { isLoading } = useSelector((state) => state.JasaReducer);
+  const { daftarJasa } = useSelector((state) => state.JasaReducer);
   const dispatch = useDispatch();
 
-  const loop = new Array(20).fill(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -96,8 +99,44 @@ const TableDaftarJasa = () => {
   };
 
   useEffect(() => {
-    console.log("status nya ", isLoadingAddJasa);
-  }, [isLoadingAddJasa]);
+    let sweetAlertInstance = null;
+
+    const showPopUpLoading = () => {
+      if (isLoading) {
+        const vortexComponent = (
+          <>
+            <Vortex
+              visible={true}
+              height="100"
+              width="100"
+              ariaLabel="vortex-loading"
+              wrapperStyle={{}}
+              wrapperClass="vortex-wrapper"
+              colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+            />
+            <p className="mt-3 fw-bold fs-4 text-primary">Loading . . .</p>
+          </>
+        );
+
+        const vortexHtmlString = renderToString(vortexComponent);
+
+        sweetAlertInstance = Swal.fire({
+          html: vortexHtmlString,
+          showConfirmButton: false,
+        });
+      } else {
+        if (sweetAlertInstance) {
+          sweetAlertInstance.close();
+        }
+      }
+    };
+
+    showPopUpLoading();
+  }, [isLoading]);
+
+  useEffect(() => {
+    dispatch(getJasa());
+  }, []);
 
   return (
     <>
@@ -108,10 +147,17 @@ const TableDaftarJasa = () => {
         </div>
         <div className="col p-0">
           <div className="container">
-            <button className="btn btn-primary mb-4" onClick={handleShow}>
+            <button
+              className="btn btn-primary mb-4 fw-medium"
+              onClick={handleShow}
+            >
               Tambah Jasa
             </button>
-
+            <p className="text-end fw-bold fs-4">
+              Total Jasa :{" "}
+              <span className="text-primary">{daftarJasa.length}</span>
+            </p>
+            {/* Modal Tambah Jasa */}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title className="modal-title fw-bold">
@@ -210,66 +256,61 @@ const TableDaftarJasa = () => {
               className="row m-0 gy-4 border border-primary rounded pb-4 px-4 bg-white"
               id="container-daftar-jasa"
             >
-              {loop.map((item, index) => {
-                return (
-                  <div className="col-4 p-0" key={index}>
-                    <Card style={{ width: "18rem" }}>
-                      <Card.Img variant="top" src="holder.js/100px180" />
-                      <Card.Body>
-                        <Card.Title>Print PI</Card.Title>
-                        <Card.Text>
-                          Some quick example text to build on the card title and
-                          make up the bulk of the cards content.
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                    <div className="d-flex justify-content-around mt-3">
-                      <button className="btn btn-success fw-medium px-4 py-0">
-                        Edit
-                      </button>
-                      <button className="btn btn-danger fw-medium py-1">
-                        Hapus
-                      </button>
+              {daftarJasa.length == 0 ? (
+                <div className="d-flex justify-content-center align-items-center">
+                  <h5>
+                    Tidak ada jasa yang tersedia, silahkan tambahkan denga klik
+                    tombol <span className="text-primary">`Tambah Jasa`</span>
+                  </h5>
+                </div>
+              ) : (
+                daftarJasa?.map((item) => {
+                  return (
+                    <div className="col-4 p-0" key={item.id}>
+                      <div
+                        className="card shadow"
+                        style={{ width: "18rem", height: "80%" }}
+                      >
+                        <img
+                          src={item.link_gambar_jasa}
+                          className="card-img-top h-50 img-fluid"
+                          alt={item.kode_jasa}
+                        />
+                        <hr className="mb-0" />
+                        <div className="card-body h-100">
+                          <h5 className="card-title fw-bold">
+                            {item.nama_jasa}
+                          </h5>
+                          <div className="d-flex m-0 p-0 justify-content-between">
+                            <p className="card-text fw-medium">Harga</p>
+                            <p className="card-text fw-medium">
+                              Rp {item.harga_jasa.toLocaleString("id-ID")}
+                            </p>
+                          </div>
+                          <p className="card-text mb-1 fw-bold">Keterangan</p>
+                          <p className="card-text">{item.keterangan}</p>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-around mt-3">
+                        <EditJasa
+                          id={item.id}
+                          nama_jasa={item.nama_jasa}
+                          kode_jasa={item.kode_jasa}
+                          harga_jasa={item.harga_jasa}
+                          keterangan={item.keterangan}
+                          public_id_gambar={item.public_id_gambar}
+                        />
+                        <DeleteJasa
+                          id={item.id}
+                          public_id_gambar={item.public_id_gambar}
+                          nama_jasa={item.nama_jasa}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
-
-            {/* <Table bordered>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nama Jasa</th>
-                  <th>Kode Jasa</th>
-                  <th>Harga Jasa</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Larry the Bird</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table> */}
           </div>
         </div>
       </div>
@@ -277,4 +318,4 @@ const TableDaftarJasa = () => {
   );
 };
 
-export default TableDaftarJasa;
+export default CardDaftarJasa;

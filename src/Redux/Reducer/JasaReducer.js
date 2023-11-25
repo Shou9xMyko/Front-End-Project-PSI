@@ -1,20 +1,21 @@
-import { ADD_JASA, LOADING_ADD_JASA } from "../Action/JasaAction";
+import { JASA, LOADING } from "../Action/JasaAction";
 
 const initialState = {
-  jasa: [],
-  isLoadingAddJasa: false,
+  daftarJasa: [],
+  isLoading: false,
 };
 
 const JasaReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_JASA:
+    case JASA:
       return {
         ...state,
+        daftarJasa: action.payload,
       };
-    case LOADING_ADD_JASA:
+    case LOADING:
       return {
         ...state,
-        isLoadingAddJasa: action.payload,
+        isLoading: action.payload,
       };
 
     default:
