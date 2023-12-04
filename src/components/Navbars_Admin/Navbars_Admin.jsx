@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FaUserCircle, FaDoorOpen } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ClearLogin } from "../../Redux/Action/LoginAction.js";
 import { useEffect } from "react";
@@ -63,16 +63,9 @@ const NavbarsAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link
-              as={Link}
-              className=""
-              // id="admin-home-menu"
-              // to="/"
-            >
-              <Link to="/" className="me-2" id="admin-home-menu">
-                Home
-              </Link>
-            </Nav.Link>
+            <Link className="me-4 mt-lg-1" id="admin-home-menu" to="/">
+              Home
+            </Link>
             <Navbar.Text
               className="text-white fw-medium"
               id="admin-email-as-login"

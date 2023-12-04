@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 export const JASA = "Jasa";
 export const ADD_JASA = "TambahJasa";
 export const LOADING = "Loading";
+export const ADD_JASA_TO_CART = "AddJasaToCart";
 
 export const Jasa = (data) => {
   return {
@@ -27,7 +28,7 @@ export const AddJasa = (data) => {
     const dataAddJasa = new FormData();
     dataAddJasa.append("nama_jasa", data.nama_jasa);
     dataAddJasa.append("kode_jasa", parseInt(data.kode_jasa));
-    dataAddJasa.append("harga_jasa", parseInt(data.harga_jasa));
+    dataAddJasa.append("harga_jasa", data.harga_jasa);
     dataAddJasa.append("gambar_jasa", data.gambar_jasa);
     dataAddJasa.append("keterangan", data.keterangan);
 
@@ -97,7 +98,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
       dataEditJasa.append("id", data.id);
       dataEditJasa.append("nama_jasa", data.nama_jasa);
       dataEditJasa.append("kode_jasa", parseInt(data.kode_jasa));
-      dataEditJasa.append("harga_jasa", parseInt(data.harga_jasa));
+      dataEditJasa.append("harga_jasa", data.harga_jasa);
       dataEditJasa.append("keterangan", data.keterangan);
 
       const decryptLogin = CryptoJS.AES.decrypt(
@@ -162,7 +163,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
       dataEditJasa.append("id", data.id);
       dataEditJasa.append("nama_jasa", data.nama_jasa);
       dataEditJasa.append("kode_jasa", parseInt(data.kode_jasa));
-      dataEditJasa.append("harga_jasa", parseInt(data.harga_jasa));
+      dataEditJasa.append("harga_jasa", data.harga_jasa);
       dataEditJasa.append("gambar_jasa", gambar_jasa);
       dataEditJasa.append("public_id_gambar", data.public_id_gambar);
       dataEditJasa.append("keterangan", data.keterangan);
@@ -290,6 +291,7 @@ export const HapusJasa = (data) => {
     }
   };
 };
+
 export const getJasa = () => {
   return async (dispatch) => {
     const response = await axios.get(
@@ -297,5 +299,35 @@ export const getJasa = () => {
     );
 
     dispatch(Jasa(response.data.data));
+  };
+};
+
+export const searchJasa = (keyword) => {
+  console.log(keyword);
+  return async (dispatch) => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_DEV}/admin/jasa`
+    );
+
+    const searchDataJasa = response.data.data.filter((item) => {
+      return (
+        item.nama_jasa.toLowerCase().includes(keyword.toLowerCase()) ||
+        item.keterangan.toLowerCase().includes(keyword.toLowerCase())
+      );
+    });
+
+    dispatch({
+      type: JASA,
+      payload: searchDataJasa.length == 0 ? keyword : searchDataJasa,
+    });
+  };
+};
+
+export const AddCart = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: ADD_JASA_TO_CART,
+      payload: data,
+    });
   };
 };

@@ -2,10 +2,11 @@
   border: 2px solid white;
   color: white;
   border-radius: 10px;
-  padding: 0.3rem 1.5em;
+  padding: 0.2rem 1.6em;
   text-decoration: none;
   font-weight: 600;
   transition: background-color 0.4s;
+  height: fit-content;
 }
 
 #admin-home-menu:hover {

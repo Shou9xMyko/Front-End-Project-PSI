@@ -3,7 +3,6 @@
   height: 75vh;
 }
 
-/* .jasa-image {
-  height: 50% !important;
-  object-fit: cover !important;
-} */
+#admin-gambar-jasa {
+  aspect-ratio: 3/3;
+}

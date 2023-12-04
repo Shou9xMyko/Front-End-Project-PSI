@@ -1,0 +1,24 @@
+#container-daftar-jasa-homepage {
+  overflow-y: auto;
+  height: 70vh;
+}
+
+#gambar-list-jasa {
+  aspect-ratio: 3/3;
+}
+
+#btn-pesan-homepage {
+  border: 2px solid #2563eb;
+  border-radius: 6px;
+  padding: 0.2rem 1.5em;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+#btn-pesan-homepage:hover {
+  border: 2px solid #2563eb;
+  background-color: white;
+  color: #2563eb;
+}

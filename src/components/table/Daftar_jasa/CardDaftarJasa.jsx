@@ -11,6 +11,7 @@ import { Vortex } from "react-loader-spinner";
 import { renderToString } from "react-dom/server";
 import EditJasa from "./ActionJasa/EditJasa/EditJasa";
 import DeleteJasa from "./ActionJasa/DeleteJasa/DeleteJasa";
+import { FaPlus } from "react-icons/fa6";
 
 const CardDaftarJasa = () => {
   const { isLoading } = useSelector((state) => state.JasaReducer);
@@ -24,7 +25,7 @@ const CardDaftarJasa = () => {
   const [jasa, setJasa] = useState({
     nama_jasa: "",
     kode_jasa: null,
-    harga_jasa: null,
+    harga_jasa: "",
     gambar_jasa: null,
     keterangan: "",
   });
@@ -89,13 +90,19 @@ const CardDaftarJasa = () => {
       setJasa({
         nama_jasa: "",
         kode_jasa: null,
-        harga_jasa: null,
+        harga_jasa: "",
         gambar_jasa: null,
         keterangan: "",
       });
 
       handleClose();
     }
+  };
+
+  const priceFormat = (textToFormat) => {
+    return textToFormat.replace(/\d+/, (angka) =>
+      parseInt(angka).toLocaleString("id-ID")
+    );
   };
 
   useEffect(() => {
@@ -151,7 +158,7 @@ const CardDaftarJasa = () => {
               className="btn btn-primary mb-4 fw-medium"
               onClick={handleShow}
             >
-              Tambah Jasa
+              <FaPlus className="mb-1" /> Tambah Jasa
             </button>
             <p className="text-end fw-bold fs-4">
               Total Jasa :{" "}
@@ -176,6 +183,7 @@ const CardDaftarJasa = () => {
                       placeholder="Masukan Nama Jasa"
                       name="nama_jasa"
                       onChange={handleInputChange}
+                      maxLength={40}
                       autoFocus
                     />
                   </Form.Group>
@@ -202,10 +210,11 @@ const CardDaftarJasa = () => {
                     </Form.Label>
                     <Form.Control
                       className="form-control-harga-jasa shadow-none "
-                      type="number"
+                      type="text"
                       placeholder="Masukan Harga Jasa"
                       name="harga_jasa"
                       onChange={handleInputChange}
+                      maxLength={20}
                       autoFocus
                     />
                   </Form.Group>
@@ -236,6 +245,7 @@ const CardDaftarJasa = () => {
                       className="shadow-none"
                       onChange={handleInputChange}
                       style={{ height: "100px" }}
+                      maxLength={40}
                       placeholder="Masukan keterangan produk anda"
                     />
                   </Form.Group>
@@ -253,7 +263,7 @@ const CardDaftarJasa = () => {
 
             {/* DAFTAR JASA */}
             <div
-              className="row m-0 gy-4 border border-primary rounded pb-4 px-4 bg-white"
+              className="row gap-4 m-0 border border-primary rounded px-5 py-5 bg-white"
               id="container-daftar-jasa"
             >
               {daftarJasa.length == 0 ? (
@@ -269,14 +279,15 @@ const CardDaftarJasa = () => {
                     <div className="col-4 p-0" key={item.id}>
                       <div
                         className="card shadow"
-                        style={{ width: "18rem", height: "80%" }}
+                        style={{ width: "18rem", height: "85%" }}
                       >
                         <img
                           src={item.link_gambar_jasa}
                           className="card-img-top h-50 img-fluid"
+                          id="admin-gambar-jasa"
                           alt={item.kode_jasa}
                         />
-                        <hr className="mb-0" />
+                        <hr className="mb-0 mt-0" />
                         <div className="card-body h-100">
                           <h5 className="card-title fw-bold">
                             {item.nama_jasa}
@@ -284,14 +295,14 @@ const CardDaftarJasa = () => {
                           <div className="d-flex m-0 p-0 justify-content-between">
                             <p className="card-text fw-medium">Harga</p>
                             <p className="card-text fw-medium">
-                              Rp {item.harga_jasa.toLocaleString("id-ID")}
+                              Rp {priceFormat(item.harga_jasa)}
                             </p>
                           </div>
                           <p className="card-text mb-1 fw-bold">Keterangan</p>
                           <p className="card-text">{item.keterangan}</p>
                         </div>
                       </div>
-                      <div className="d-flex justify-content-around mt-3">
+                      <div className="d-flex justify-content-around mt-3 mb-0">
                         <EditJasa
                           id={item.id}
                           nama_jasa={item.nama_jasa}

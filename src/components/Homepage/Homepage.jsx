@@ -10,7 +10,7 @@ const Homepage = () => {
     <>
       <Navbars />
       <div className="d-flex justify-content-center">
-        <img src={BannerPelangiPrint} alt="Banners" />
+        <img src={BannerPelangiPrint} alt="Banners" className="img-fluid" />
       </div>
       {/* <InputSearchJasa /> */}
       <ListJasa />

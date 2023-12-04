@@ -1,0 +1,10 @@
+#input-group-search-jasa {
+  width: 50%;
+  transition: width 0.5s ease;
+}
+
+@media screen and (max-width: 1000px) {
+  #input-group-search-jasa {
+    width: 100%;
+  }
+}

@@ -108,7 +108,7 @@ const EditJasa = (dataJasa) => {
               </Form.Label>
               <Form.Control
                 className="form-control-harga-jasa shadow-none "
-                type="number"
+                type="text"
                 placeholder="Masukan Harga Jasa"
                 name="harga_jasa"
                 value={dataJasaValue.harga_jasa}
