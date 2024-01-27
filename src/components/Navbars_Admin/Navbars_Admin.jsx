@@ -63,9 +63,6 @@ const NavbarsAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Link className="me-4 mt-lg-1" id="admin-home-menu" to="/">
-              Home
-            </Link>
             <Navbar.Text
               className="text-white fw-medium"
               id="admin-email-as-login"

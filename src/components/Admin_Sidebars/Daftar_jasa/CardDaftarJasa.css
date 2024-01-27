@@ -1,0 +1,35 @@
+#container-daftar-jasa {
+  overflow-y: auto;
+  height: 75vh;
+}
+
+/* #rows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+#btn-card-lihat-detail {
+  font-size: 12px;
+  padding: 0.35em 1.5em;
+}
+
+#admin-gambar-jasa {
+  aspect-ratio: 3/3;
+}
+
+#wrapper-admin-input-search-jasa {
+  width: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+  #wrapper-admin-input-search-jasa {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #wrapper-admin-input-search-jasa {
+    width: 100%;
+  }
+}

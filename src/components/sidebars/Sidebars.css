@@ -4,3 +4,9 @@
 .sub-menu:hover {
   color: #2563eb;
 }
+
+#btn-menu {
+  border: none;
+  background-color: white;
+  margin-left: 2rem;
+}

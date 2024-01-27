@@ -1,0 +1,14 @@
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#btn-dashboard {
+  color: #334155;
+  transition: color 0.4s ease;
+}
+#btn-dashboard:hover {
+  color: #334155;
+  color: #2563eb;
+}

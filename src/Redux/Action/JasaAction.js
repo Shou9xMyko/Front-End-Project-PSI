@@ -6,6 +6,7 @@ export const JASA = "Jasa";
 export const ADD_JASA = "TambahJasa";
 export const LOADING = "Loading";
 export const ADD_JASA_TO_CART = "AddJasaToCart";
+export const CLEAR_CART_JASA = "ClearCartJasa";
 
 export const Jasa = (data) => {
   return {
@@ -27,10 +28,11 @@ export const AddJasa = (data) => {
   return async (dispatch) => {
     const dataAddJasa = new FormData();
     dataAddJasa.append("nama_jasa", data.nama_jasa);
-    dataAddJasa.append("kode_jasa", parseInt(data.kode_jasa));
+    dataAddJasa.append("kode_jasa", data.kode_jasa);
     dataAddJasa.append("harga_jasa", data.harga_jasa);
-    dataAddJasa.append("gambar_jasa", data.gambar_jasa);
-    dataAddJasa.append("keterangan", data.keterangan);
+    dataAddJasa.append("foto_jasa", data.foto_jasa);
+    dataAddJasa.append("rincian_jasa", data.rincian_jasa);
+    dataAddJasa.append("waktu_pengerjaan", data.waktu_pengerjaan);
 
     const decryptLogin = CryptoJS.AES.decrypt(
       localStorage.getItem("login"),
@@ -55,7 +57,7 @@ export const AddJasa = (data) => {
 
       if (
         response.data.status_code == 200 &&
-        response.data.status == "Success"
+        response.data.status == "success"
       ) {
         dispatch(isLoading(false));
         Swal.fire({
@@ -91,15 +93,17 @@ export const AddJasa = (data) => {
 };
 
 //EDIT JASA
-export const EditJasaItem = (data, gambar_jasa) => {
+export const EditJasaItem = (data) => {
+  console.log(data);
   return async (dispatch) => {
-    if (gambar_jasa == null) {
+    if (data.foto_jasa == null || typeof data.foto_jasa == "undefined") {
       const dataEditJasa = new FormData();
       dataEditJasa.append("id", data.id);
       dataEditJasa.append("nama_jasa", data.nama_jasa);
-      dataEditJasa.append("kode_jasa", parseInt(data.kode_jasa));
+      dataEditJasa.append("kode_jasa", data.kode_jasa);
       dataEditJasa.append("harga_jasa", data.harga_jasa);
-      dataEditJasa.append("keterangan", data.keterangan);
+      dataEditJasa.append("rincian_jasa", data.rincian_jasa);
+      dataEditJasa.append("waktu_pengerjaan", data.waktu_pengerjaan);
 
       const decryptLogin = CryptoJS.AES.decrypt(
         localStorage.getItem("login"),
@@ -126,7 +130,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
 
         if (
           response.data.status_code == 200 &&
-          response.data.status == "Success"
+          response.data.status == "success"
         ) {
           dispatch(isLoading(false));
           Swal.fire({
@@ -138,7 +142,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
           dispatch(getJasa());
         } else if (
           response.data.status_code == 500 &&
-          response.data.status == "Failed"
+          response.data.status == "failed"
         ) {
           dispatch(isLoading(false));
           Swal.fire({
@@ -162,11 +166,11 @@ export const EditJasaItem = (data, gambar_jasa) => {
       const dataEditJasa = new FormData();
       dataEditJasa.append("id", data.id);
       dataEditJasa.append("nama_jasa", data.nama_jasa);
-      dataEditJasa.append("kode_jasa", parseInt(data.kode_jasa));
+      dataEditJasa.append("kode_jasa", data.kode_jasa);
       dataEditJasa.append("harga_jasa", data.harga_jasa);
-      dataEditJasa.append("gambar_jasa", gambar_jasa);
-      dataEditJasa.append("public_id_gambar", data.public_id_gambar);
-      dataEditJasa.append("keterangan", data.keterangan);
+      dataEditJasa.append("foto_jasa", data.foto_jasa);
+      dataEditJasa.append("rincian_jasa", data.rincian_jasa);
+      dataEditJasa.append("waktu_pengerjaan", data.waktu_pengerjaan);
 
       const decryptLogin = CryptoJS.AES.decrypt(
         localStorage.getItem("login"),
@@ -193,7 +197,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
 
         if (
           response.data.status_code == 200 &&
-          response.data.status == "Success"
+          response.data.status == "success"
         ) {
           dispatch(isLoading(false));
           Swal.fire({
@@ -205,7 +209,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
           dispatch(getJasa());
         } else if (
           response.data.status_code == 500 &&
-          response.data.status == "Failed"
+          response.data.status == "failed"
         ) {
           dispatch(isLoading(false));
           Swal.fire({
@@ -230,7 +234,7 @@ export const EditJasaItem = (data, gambar_jasa) => {
 };
 
 // HAPUS JASA
-export const HapusJasa = (data) => {
+export const HapusJasa = (id) => {
   return async (dispatch) => {
     const decryptLogin = CryptoJS.AES.decrypt(
       localStorage.getItem("login"),
@@ -246,8 +250,7 @@ export const HapusJasa = (data) => {
         `${import.meta.env.VITE_API_DEV}/admin/hapus-jasa`,
         {
           params: {
-            id: data.id,
-            public_id_gambar: data.public_id_gambar,
+            id: id,
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -257,7 +260,7 @@ export const HapusJasa = (data) => {
 
       if (
         response.data.status_code == 200 &&
-        response.data.status == "Success"
+        response.data.status == "success"
       ) {
         dispatch(isLoading(false));
         Swal.fire({
@@ -269,7 +272,7 @@ export const HapusJasa = (data) => {
         dispatch(getJasa());
       } else if (
         response.data.status_code == 500 &&
-        response.data.status == "Failed"
+        response.data.status == "failed"
       ) {
         dispatch(isLoading(false));
         Swal.fire({
@@ -303,7 +306,6 @@ export const getJasa = () => {
 };
 
 export const searchJasa = (keyword) => {
-  console.log(keyword);
   return async (dispatch) => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_DEV}/admin/jasa`
@@ -329,5 +331,11 @@ export const AddCart = (data) => {
       type: ADD_JASA_TO_CART,
       payload: data,
     });
+  };
+};
+
+export const ClearCart = (status) => {
+  return async (dispatch) => {
+    dispatch({ type: CLEAR_CART_JASA, payload: [], status: status });
   };
 };

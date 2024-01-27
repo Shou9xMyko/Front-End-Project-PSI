@@ -1,0 +1,73 @@
+.icon-trash {
+  color: #2196f3;
+  transition: color 0.5s;
+}
+
+.icon-trash:hover {
+  color: #dc3545;
+}
+
+#img-daftar-belanja {
+  width: auto;
+  height: 150px;
+  object-fit: cover;
+}
+
+.text-price,
+.text-total-price {
+  font-size: 14px;
+}
+
+.wrapper-cart-jumlah-input {
+  width: 30%;
+}
+
+.wrapper-cart-jumlah-input input {
+  padding: 2px 0px !important;
+  text-align: center;
+  font-size: 13px;
+}
+
+#btn-min,
+#btn-plus {
+  padding: 0 10px !important;
+  font-weight: 600;
+  font-size: 15px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.5s;
+}
+
+#btn-min:hover,
+#btn-plus:hover {
+  background-color: #286aa0;
+}
+
+#btn-checkout {
+  background-color: #2196f3;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  color: white;
+  padding: 6px 16px;
+  transition: background-color 0.5s;
+}
+
+#btn-lanjutkan-belanja {
+  background-color: rgb(220, 221, 223);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 6px 18px;
+  transition: background-color 0.5s;
+}
+
+#btn-checkout:hover {
+  background-color: #2b77b6;
+}
+
+#btn-lanjutkan-belanja:hover {
+  background-color: rgb(185, 186, 187);
+}

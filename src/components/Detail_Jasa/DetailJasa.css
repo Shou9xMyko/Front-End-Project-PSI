@@ -1,0 +1,73 @@
+.dropzone {
+  border-style: dashed;
+  border-color: #eeeeee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em 0;
+  background-color: #fafafa;
+  transition: "border .24s ease-in-out";
+}
+.dropzone:focus {
+  border-color: #2196f3;
+}
+
+#text-upload-max-file {
+  font-size: 11px;
+  padding: 0 1em;
+  margin-top: 1em;
+}
+
+#disini-link-upload {
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+#text-waktu-pengerjaan {
+  font-size: 12px;
+}
+
+@media screen and (max-width: 500px) {
+  #btn-beli {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 850px) {
+  #btn-beli {
+    width: 60%;
+    padding: 10px 0px;
+  }
+
+  #col-upload {
+    padding-top: 1em;
+  }
+
+  #col-keterangan {
+    padding-top: 1.6em;
+  }
+
+  #text-area-keterangan {
+    height: 17rem !important;
+  }
+}
+
+@media screen and (min-width: 851px) {
+  #btn-beli {
+    width: 70%;
+    padding: 10px 0px;
+  }
+
+  #col-upload {
+    padding-top: 1.5em;
+  }
+
+  #col-keterangan {
+    padding-top: 2em;
+  }
+
+  #text-area-keterangan {
+    height: 17rem !important;
+  }
+}

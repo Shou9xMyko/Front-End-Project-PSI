@@ -22,3 +22,20 @@
   background-color: #2563eb !important;
   color: white !important;
 }
+
+#container-cart-jasa {
+  max-height: 34.5vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#tooltip-close-button {
+  font-size: 2.2em;
+  cursor: pointer;
+}
+
+#tooltip-nama-jasa {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

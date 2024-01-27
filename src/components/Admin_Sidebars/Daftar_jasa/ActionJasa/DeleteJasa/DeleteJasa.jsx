@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { HapusJasa } from "../../../../../Redux/Action/JasaAction";
 import Swal from "sweetalert2";
+import { MdDelete } from "react-icons/md";
 
 const DeleteJasa = (dataJasa) => {
   const dispatch = useDispatch();
@@ -16,16 +17,16 @@ const DeleteJasa = (dataJasa) => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(HapusJasa(dataJasa));
+        dispatch(HapusJasa(dataJasa.id));
       }
     });
   };
   return (
     <button
-      className="btn btn-danger fw-medium py-1"
+      className="btn btn-danger fw-medium px-2 "
       onClick={handleClickDeleteJasa}
     >
-      Hapus
+      <MdDelete className="bg-primarys mb-1" /> Hapus
     </button>
   );
 };

@@ -1,0 +1,13 @@
+.ck-editor__editable_inline:not(.ck-comment__input *) {
+  height: 300px;
+  overflow-y: auto;
+}
+
+#btn-dashboard {
+  color: #334155;
+  transition: color 0.4s ease;
+}
+#btn-dashboard:hover {
+  color: #334155;
+  color: #2563eb;
+}

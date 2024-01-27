@@ -2,40 +2,40 @@ import "./ListJasa.css";
 import { BsCartPlus } from "react-icons/bs";
 import InputSearchJasa from "../InputSearchJasa/InputSearchJasa";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { AddCart, getJasa } from "../../Redux/Action/JasaAction";
+import { useEffect, useState } from "react";
+import { AddCart, ClearCart, getJasa } from "../../Redux/Action/JasaAction";
+import { useNavigate } from "react-router-dom";
 
 const ListJasa = () => {
   const { daftarJasa } = useSelector((state) => state.JasaReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleAddCartJasa = (
-    gambar_jasa,
-    nama_jasa,
-    harga_jasa,
-    keterangan_jasa
-  ) => {
-    const priceFormat = parseInt(harga_jasa.match(/\d+/)[0]);
+  const [jasa, setJasa] = useState(daftarJasa);
 
-    const dataToCart = {
-      gambar_jasa,
-      nama_jasa,
-      priceFormat,
-      keterangan_jasa,
-    };
+  const [searchValue, setSearchValue] = useState("");
 
-    dispatch(AddCart(dataToCart));
-  };
+  const handleSearchJasa = (event) => {
+    const keyword = event.target.value;
 
-  const priceFormat = (textToFormat) => {
-    return textToFormat.replace(/\d+/, (angka) =>
-      parseInt(angka).toLocaleString("id-ID")
-    );
+    const findJasa = daftarJasa.filter((item) => {
+      return (
+        item.nama_jasa.toLowerCase().includes(keyword.toLowerCase()) ||
+        item.rincian_jasa.toLowerCase().includes(keyword.toLowerCase())
+      );
+    });
+
+    setJasa(findJasa);
+    setSearchValue(keyword);
   };
 
   useEffect(() => {
+    setJasa(daftarJasa);
+  }, [daftarJasa]);
+
+  useEffect(() => {
     dispatch(getJasa());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container mt-5 mb-5">
@@ -45,28 +45,38 @@ const ListJasa = () => {
         </div>
         <div className="col-6 text-end">
           <h3 className="fw-bold">
-            Total Jasa :{" "}
-            <span className="text-primary">
-              {typeof daftarJasa == "string" ? 0 : daftarJasa.length}
-            </span>
+            Total Jasa : <span className="text-primary">{jasa.length}</span>
           </h3>
         </div>
       </div>
-      <InputSearchJasa />
+      {/* SEARCH JASA */}
+      <div className="input-group mb-3 mt-2" id="input-group-search-jasa">
+        <input
+          type="text"
+          className="form-control py-2 ps-4 shadow-none"
+          placeholder="Cari Jasa..."
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          value={searchValue}
+          onChange={handleSearchJasa}
+        />
+      </div>
 
       {/* Card */}
       <div
         className="row m-0 pb-5 gy-4 gy-lg-5 mt-1 bg-white rounded-3 shadow justify-content-center"
         id="container-daftar-jasa-homepage"
       >
-        {typeof daftarJasa == "string" ? (
+        {jasa.length == 0 ? (
           <h4 className="text-center fw-medium">
             Tidak ada jasa dengan kata kunci &ldquo;
-            <span className="text-primary">{daftarJasa}</span>&ldquo;, coba
+            <span className="text-primary">{searchValue}</span>&ldquo;, coba
             dengan kata kunci lain
           </h4>
+        ) : daftarJasa.length == 0 ? (
+          <h5 className="text-center">Tidak ada jasa yang tersedia</h5>
         ) : (
-          daftarJasa?.map((item) => {
+          jasa?.map((item) => {
             return (
               <div
                 className="col-12 col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center "
@@ -75,11 +85,12 @@ const ListJasa = () => {
                 <div
                   className="card shadow"
                   id="card-jasa"
-                  style={{ width: "18rem", height: "30rem" }}
+                  style={{ width: "18rem", height: "100%" }}
+                  onClick={() => navigate(`/detail-jasa/${item.id}`)}
                 >
                   <img
-                    src={item.link_gambar_jasa}
-                    className="card-img-top h-50 img-fluid"
+                    src={`data:image/png;base64,${item.foto_jasa}`}
+                    className="card-img-top h-75 img-fluid"
                     alt={item.kode_jasa}
                     id="gambar-list-jasa"
                   />
@@ -89,29 +100,15 @@ const ListJasa = () => {
                     <div className="d-flex m-0 p-0 justify-content-between">
                       <p className="card-text fw-medium">Harga</p>
                       <p className="card-text fw-medium">
-                        Rp {priceFormat(item.harga_jasa)}
+                        Rp {item.harga_jasa.toLocaleString("id-ID")}
                       </p>
                     </div>
-                    <p className="card-text mb-1 fw-bold">Keterangan</p>
-                    <p className="card-text mb-5">{item.keterangan}</p>
-                    <div
-                      className="d-flex justify-content-end"
-                      style={{ marginBottom: "3.5rem" }}
-                    >
+                    <div className="text-end">
                       <button
-                        id="btn-pesan-homepage"
-                        className="fw-medium"
-                        onClick={() =>
-                          handleAddCartJasa(
-                            item.link_gambar_jasa,
-                            item.nama_jasa,
-                            item.harga_jasa,
-                            item.keterangan
-                          )
-                        }
+                        className="btn btn-primary btn-sm"
+                        onClick={() => navigate(`/jasa/detail-jasa/${item.id}`)}
                       >
-                        <BsCartPlus className="fs-5 mb-1 me-1" /> Masukan
-                        Keranjang
+                        Lihat Detail...
                       </button>
                     </div>
                   </div>

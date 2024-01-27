@@ -1,9 +1,15 @@
-import { ADD_JASA_TO_CART, JASA, LOADING } from "../Action/JasaAction";
+import {
+  ADD_JASA_TO_CART,
+  CLEAR_CART_JASA,
+  JASA,
+  LOADING,
+} from "../Action/JasaAction";
 
 const initialState = {
   daftarJasa: [],
   isLoading: false,
   cartJasa: [],
+  isClearCart: false,
 };
 
 const JasaReducer = (state = initialState, action) => {
@@ -21,9 +27,15 @@ const JasaReducer = (state = initialState, action) => {
     case ADD_JASA_TO_CART:
       return {
         ...state,
-        cartJasa: [...state.cartJasa, action.payload],
+        cartJasa: action.payload,
       };
 
+    case CLEAR_CART_JASA:
+      return {
+        ...state,
+        cartJasa: action.payload,
+        isClearCart: action.status,
+      };
     default:
       return state;
   }
